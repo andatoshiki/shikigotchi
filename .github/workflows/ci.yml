@@ -1,0 +1,58 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version from file
+        id: get_version
+        run: |
+          VERSION=$(cut -d "'" -f2 < shikigotchi/_version.py)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Install qemu dependencies
+        run: sudo apt update && sudo apt install qemu-user-static qemu-utils xz-utils -y
+
+      - name: Build img file
+        run: ls -la .; pwd; make all
+
+      - name: Transfer 32bit.img to docker and give permissions
+        run: sudo chown runner:docker "shikigotchi-32bit.img"
+
+      - name: Transfer 64bit.img to docker and give permissions
+        run: sudo chown runner:docker "shikigotchi-64bit.img"
+
+      - name: PiShrink
+        run: |
+          wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
+          chmod +x pishrink.sh
+          sudo mv pishrink.sh /usr/local/bin
+          find /home/runner/work/ -type f -name "*.img" -exec sudo pishrink.sh -aZ {} \;
+
+      - name: Change name of 32.img.xz to add version
+        run: mv "shikigotchi-32bit.img.xz" "shikigotchi-$VERSION-32bit.img.xz"
+
+      - name: Change name of 64.img.xz to add version
+        run: mv "shikigotchi-64bit.img.xz" "shikigotchi-$VERSION-64bit.img.xz"
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          prerelease: false
+          make_latest: true
+          tag_name: v${{ env.VERSION }}
+          name: Shikigotchi v${{ env.VERSION }}
+          files: |
+              shikigotchi-${{ env.VERSION }}-32bit.img.xz
+              shikigotchi-${{ env.VERSION }}-64bit.img.xz
+          generate_release_notes: true

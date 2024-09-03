@@ -1,0 +1,19 @@
+[Unit]
+Description=shikigotchi Deep Reinforcement Learning instrumenting bettercap for WiFI shikiing.
+Documentation=https://shikigotchi.toshiki.dev
+Wants=network.target
+After=shikigrid-peer.service
+
+[Service]
+Type=simple
+WorkingDirectory=~
+ExecStart=/usr/bin/shikigotchi-launcher
+Restart=always
+RestartSec=30
+TasksMax=infinity
+LimitNPROC=infinity
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

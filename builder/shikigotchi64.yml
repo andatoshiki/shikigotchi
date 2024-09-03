@@ -521,10 +521,11 @@
       file:
         state: absent
         path: /usr/local/src/bettercap
-
+        
     - name: clone bettercap caplets
       git:
-        repo: "{{ packages.caplets.branch }}"
+        repo: "{{ packages.caplets.source }}"
+        version: "{{ packages.caplets.branch }}"
         dest: /tmp/caplets
       register: capletsgit
 

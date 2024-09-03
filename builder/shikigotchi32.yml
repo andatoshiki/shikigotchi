@@ -384,15 +384,12 @@
         dest: /usr/local/bin/
         mode: 0755
 
-    - name: download and install bettercap
-      unarchive:
-        src: "{{ packages.bettercap.url }}"
-        dest: /usr/local/bin
-        remote_src: yes
-        exclude:
-          - README.md
-          - LICENSE.md
-        mode: 0755
+    - name: clone bettercap caplets
+      git:
+        repo: "{{ packages.caplets.source }}"
+        version: "{{ packages.caplets.branch }}"
+        dest: /tmp/caplets
+      register: capletsgit
 
     - name: clone bettercap caplets
       git:

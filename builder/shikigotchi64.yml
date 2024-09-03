@@ -290,7 +290,7 @@
 
     - name: clone nexmon repository
       git:
-        repo: https://git.toshiki.dev/andatoshiki/nexmon.git
+        repo: https://github.com/DrSchottky/nexmon.git
         dest: /usr/local/src/nexmon
 
     # FIRST WE BUILD DRIVER FOR RPi5
@@ -343,7 +343,7 @@
 
     - name: clone nexmon repository
       git:
-        repo: https://git.toshiki.dev/andatoshiki/nexmon.git
+        repo: https://github.com/DrSchottky/nexmon.git
         dest: /usr/local/src/nexmon
 
     - name: make firmware, RPi4

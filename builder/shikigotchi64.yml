@@ -521,7 +521,7 @@
       file:
         state: absent
         path: /usr/local/src/bettercap
-        
+       
     - name: clone bettercap caplets
       git:
         repo: "{{ packages.caplets.source }}"

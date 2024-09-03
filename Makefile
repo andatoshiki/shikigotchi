@@ -52,7 +52,7 @@ image: clean packer
 	cd builder && sudo /usr/bin/packer init shikigotchi32.pkr.hcl && sudo $(UNSHARE) /usr/bin/packer build -var "shiki_hostname=$(SHIKI_HOSTNAME)" -var "shiki_version=$(SHIKI_VERSION)" shikigotchi32.pkr.hcl
 
 64bit: clean packer
-	cd builder && sudo /usr/bin/packer init raspberrypi64.pkr.hcl && sudo $(UNSHARE) /usr/bin/packer build -var "shiki_hostname=$(SHIKI_HOSTNAME)" -var "shiki_version=$(SHIKI_VERSION)" raspberrypi64.pkr.hcl
+	cd builder && sudo /usr/bin/packer init shikigotchi64.pkr.hcl && sudo $(UNSHARE) /usr/bin/packer build -var "shiki_hostname=$(SHIKI_HOSTNAME)" -var "shiki_version=$(SHIKI_VERSION)" shikigotchi64.pkr.hcl
 
 clean:
 	- rm -rf /tmp/packer*

@@ -391,12 +391,6 @@
         dest: /tmp/caplets
       register: capletsgit
 
-    - name: clone bettercap caplets
-      git:
-        repo: "{{ packages.caplets.branch }}"
-        dest: /tmp/caplets
-      register: capletsgit
-
     - name: install bettercap caplets
       make:
         chdir: /tmp/caplets

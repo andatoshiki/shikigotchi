@@ -27,7 +27,7 @@
     packages:
       caplets:
         source: "https://git.toshiki.dev/shikigotchi/caplets.git"
-        branch: "lite" # or "master"
+        # branch: "lite" # or "master"
       bettercap:
         source: "https://github.com/jayofelony/bettercap.git"
         url: "https://github.com/jayofelony/bettercap/releases/download/2.32.4/bettercap-2.32.4.zip"
@@ -525,7 +525,6 @@
     - name: clone bettercap caplets
       git:
         repo: "{{ packages.caplets.source }}"
-        version: "{{ packages.caplets.branch }}"
         dest: /tmp/caplets
       register: capletsgit
 

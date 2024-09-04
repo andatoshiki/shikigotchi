@@ -58,7 +58,7 @@
     packages:
       caplets:
         source: "https://git.toshiki.dev/shikigotchi/caplets.git"
-        branch: "lite" # or "master"
+        # branch: "lite" # or "master"
       bettercap:
         source: "https://github.com/jayofelony/bettercap.git"
         url: "https://github.com/jayofelony/bettercap/releases/download/2.32.2/bettercap-2.32.2-armhf.zip"
@@ -222,19 +222,6 @@
         executable: /bin/bash
         chdir: /usr/local/src
 
-    - name: clone shikigotchi repository
-      git:
-        repo: https://git.toshiki.dev/shikigotchi/shikigotchi.git
-        dest: /usr/local/src/shikigotchi
-      register: shikigotchigit
-
-    - name: build shikigotchi wheel
-      command: "python3 setup.py sdist bdist_wheel"
-      args:
-        chdir: /usr/local/src/shikigotchi
-      when: (shikigotchigit.changed) or (pip_packages['shikigotchi'] is undefined) or (pip_packages['shikigotchi'] != shikigotchi_version)
-
-
     - name: Create custom plugin directory
       file:
         path: '{{ shikigotchi.custom_plugin_dir }}'
@@ -313,10 +300,17 @@
         state: absent
         path: /usr/local/src/nexmon/
 
-    # - name: build shikigotchi wheel
-    #   command: "pip3 install . --no-cache-dir --break-system-packages"
-    #   args:
-    #     chdir: /usr/local/src/shikigotchi
+    - name: clone shikigotchi repository
+      git:
+        repo: https://git.toshiki.dev/shikigotchi/shikigotchi.git
+        dest: /usr/local/src/shikigotchi
+      register: shikigotchigit
+
+    - name: build shikigotchi wheel
+      command: "python3 setup.py sdist bdist_wheel"
+      args:
+        chdir: /usr/local/src/shikigotchi
+      when: (shikigotchigit.changed) or (pip_packages['shikigotchi'] is undefined) or (pip_packages['shikigotchi'] != shikigotchi_version)
 
     - name: download torch whl
       get_url:
@@ -387,7 +381,6 @@
     - name: clone bettercap caplets
       git:
         repo: "{{ packages.caplets.source }}"
-        version: "{{ packages.caplets.branch }}"
         dest: /tmp/caplets
       register: capletsgit
 

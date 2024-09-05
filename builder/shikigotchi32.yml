@@ -184,7 +184,7 @@
           - zlib1g-dev
 
   tasks:
-    - name: Create pi user
+    - name: Create pi user # echo 'raspberry' | openssl passwd -6 -stdin
       copy:
         dest: /boot/userconf
         content: |

@@ -1,0 +1,6 @@
+/builder/** linguist-vendored
+/scripts/** linguist-vendored
+/shikigotchi/ui/web/static/** linguist-vendored
+/shikigotchi/ui/web/templates/*.* linguist-vendored
+/shikigotchi/ui/web/templates/** linguist-vendored
+/shikigotchi/locale/** linguist-vendored

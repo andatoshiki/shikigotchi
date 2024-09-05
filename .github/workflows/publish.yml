@@ -1,0 +1,58 @@
+name: Build or Publish Shikigotchi
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+        - name: "Shikigotchi 32-bit"
+          id: "32bit"  
+        - name: "Shikigotchi 64-bit"
+          id: "64bit"
+        # - name: "Shikigotchi Custom 32-bit"
+        #   id: "custom"
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: publish/build
+
+      - name: Extract version from file
+        id: get_version
+        run: |
+          VERSION=$(cut -d "'" -f2 < publish/build/shikigotchi/_version.py)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Install qemu dependencies
+        run: sudo apt update && sudo apt install qemu-user-static qemu-utils xz-utils -y
+
+      - name: Build ${{ matrix.name }} img file
+        run: cd publish/build; ls -la .; pwd; make packer; make ${{ matrix.id }}
+      
+      - name: Change name of .img.xz to add version
+        run: |
+          sudo chown runner:docker "shikigotchi-${{ matrix.id }}.img"
+          mv "shikigotchi-${{ matrix.id }}.img" "shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img"
+
+      - name: PiShrink
+        run: |
+          wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
+          chmod +x pishrink.sh
+          sudo mv pishrink.sh /usr/local/bin
+          sudo pishrink.sh -aZ "shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img"
+
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          prerelease: false
+          make_latest: true
+          tag_name: v${{ env.VERSION }}
+          name: shikigotchi v${{ env.VERSION }}
+          files: shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img.xz
+          generate_release_notes: true

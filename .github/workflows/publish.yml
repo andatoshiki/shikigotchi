@@ -5,6 +5,12 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+        pishrink:
+            description: "pishrink Script"
+            default: "https://raw.toshiki.dev/Drewsif/PiShrink/master/pishrink.sh"
+            type: string
+
 
 jobs:
   build:
@@ -44,7 +50,7 @@ jobs:
 
       - name: PiShrink
         run: |
-          wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
+          wget ${{ inputs.pishrink }}
           chmod +x pishrink.sh
           sudo mv pishrink.sh /usr/local/bin
           sudo pishrink.sh -aZ "shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img"

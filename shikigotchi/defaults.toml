@@ -1,10 +1,8 @@
 main.name = "shikigotchi"
 main.lang = "en"
 main.whitelist = [
-    "EXAMPLE_NETWORK",
-    "ANOTHER_EXAMPLE_NETWORK",
-    "fo:od:ba:be:fo:od",
-    "fo:od:ba"
+    "NETWORK_SSID",
+    "fo:ob:ar:fo:ob:ar"
 ]
 main.confd = "/etc/shikigotchi/conf.d/"
 main.custom_plugin_repos = [

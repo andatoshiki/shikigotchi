@@ -1,6 +1,9 @@
 name: Build or Publish Shikigotchi
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:

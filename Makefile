@@ -54,5 +54,8 @@ image: clean packer
 64bit: clean packer
 	cd builder && sudo /usr/bin/packer init shikigotchi64.pkr.hcl && sudo $(UNSHARE) /usr/bin/packer build -var "shiki_hostname=$(SHIKI_HOSTNAME)" -var "shiki_version=$(SHIKI_VERSION)" shikigotchi64.pkr.hcl
 
+csutom: clean packer
+	cd builder && sudo /usr/bin/packer init shikigotchi64.pkr.hcl && sudo $(UNSHARE) /usr/bin/packer build -var "shiki_hostname=$(SHIKI_HOSTNAME)" -var "shiki_version=$(SHIKI_VERSION)" shikigotchi64.pkr.hcl
+
 clean:
 	- rm -rf /tmp/packer*

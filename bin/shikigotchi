@@ -266,7 +266,7 @@ def shikigotchi_cli():
 
     if args.donate:
         print("Donations & Sponsorship can be made @ \n "
-              "https://donate.toshiki.dev \n"
+              "https://toshiki.dev/donate \n"
               "Donations are not mandatorily required but solely upon your will & discretion for maximizing the support of this project!")
         sys.exit(0)
 

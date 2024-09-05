@@ -95,6 +95,6 @@ build {
   provisioner "ansible-local" {
     command         = "ANSIBLE_FORCE_COLOR=1 PYTHONUNBUFFERED=1 SHIKI_VERSION=${var.shiki_version} SHIKI_HOSTNAME=${var.shiki_hostname} ansible-playbook"
     extra_arguments = ["--extra-vars \"ansible_python_interpreter=/usr/bin/python3\""]
-    playbook_file   = "raspberrypi64.yml"
+    playbook_file   = "shikigotchi64.yml"
   }
 }

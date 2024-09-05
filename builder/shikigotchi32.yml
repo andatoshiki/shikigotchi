@@ -65,7 +65,7 @@
         ui: "https://github.com/bettercap/ui/releases/download/v1.3.0/ui.zip"
       shikigrid:
         source: "https://git.toshiki.dev/andatoshiki/shikigrid.git"
-        url: "https://git.toshiki.dev/shikigotchi/shikigrid/releases/download/0.0.1/shikigrid-0.0.1-armhf.zip"
+        url: "https://git.toshiki.dev/shikigotchi/shikigrid/releases/download/0.0.2/shikigrid-0.0.3-armhf.zip"
       torch:
         wheel: "torch-2.1.0a0+gitunknown-cp39-cp39-linux_armv6l.whl"
         url: "https://github.com/Sniffleupagus/Torch4Pizero/releases/download/v1.0.0/torch-2.1.0a0+gitunknown-cp39-cp39-linux_armv6l.whl"

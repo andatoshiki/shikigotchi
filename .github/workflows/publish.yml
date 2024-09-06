@@ -46,6 +46,12 @@ jobs:
           chmod +x pishrink.sh
           sudo mv pishrink.sh /usr/local/bin
           sudo pishrink.sh -aZ "shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img"
+      
+      - name: Upload built artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: shikigotchi-${{ env.VERSION }}-${{ matrix.id }}
+          path: shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img.xz
 
       - name: Release
         if: startsWith(github.ref, 'refs/tags/')

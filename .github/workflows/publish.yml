@@ -32,7 +32,7 @@ jobs:
       - name: Extract version from file
         id: get_version
         run: |
-          VERSION=$(cut -d "'" -f2 < publish/build/shikigotchi/_version.py)
+          VERSION=$(cut -d "'" -f2 < shikigotchi/_version.py)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Install qemu dependencies

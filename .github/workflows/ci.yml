@@ -2,8 +2,8 @@ name: Build or Publish Shikigotchi
 
 on:
   push:
-    # tags:        
-    #   - '*.*.*'  
+    tags:        
+      - '*.*.*'  
     branches:
       - master
   workflow_dispatch:
@@ -59,10 +59,10 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          prerelease: false
-          make_latest: true
-          tag_name: ${{ env.VERSION }}
-          name: Shikigotchi v${{ env.VERSION }}
+          # prerelease: false
+          # make_latest: true
+          # tag_name: ${{ env.VERSION }}
+          # name: Shikigotchi v${{ env.VERSION }}
           files: shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img.xz
-          generate_release_notes: true
+          # generate_release_notes: true
           token: ${{ secrets.GH_TOKEN }}

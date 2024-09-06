@@ -42,7 +42,7 @@ jobs:
 
       - name: PiShrink
         run: |
-          wget https://raw.toshiki.dev/Drewsif/PiShrink/master/pishrink.sh
+          wget https://raw.toshiki.dev/andatoshiki/shikigotchi/master/scripts/pishrink.sh
           chmod +x pishrink.sh
           sudo mv pishrink.sh /usr/local/bin
           sudo pishrink.sh -aZ "shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img"

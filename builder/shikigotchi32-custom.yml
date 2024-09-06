@@ -393,7 +393,7 @@
         dest: /usr/local/src/shikigrid
 
     - name: install shikigrid
-      shell: "export GOPATH=$HOME/go && export PATH=/usr/local/go/bin:$PATH:$GOPATH/bin && go mod tidy && make install"
+      shell: "export GOPATH=$HOME/go && export PATH=/usr/local/go/bin:$PATH:$GOPATH/bin && go mod tidy && make all && make install"
       args:
         executable: /bin/bash
         chdir: /usr/local/src/shikigrid

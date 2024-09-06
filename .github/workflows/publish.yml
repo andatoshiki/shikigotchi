@@ -2,6 +2,8 @@ name: Build or Publish Shikigotchi
 
 on:
   push:
+    tags:        
+      - 'v*.*.*'  
     branches:
       - master
   workflow_dispatch:
@@ -42,7 +44,7 @@ jobs:
 
       - name: PiShrink
         run: |
-          wget https://raw.toshiki.dev/andatoshiki/shikigotchi/master/scripts/pishrink.sh
+          wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
           chmod +x pishrink.sh
           sudo mv pishrink.sh /usr/local/bin
           sudo pishrink.sh -aZ "shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img"
@@ -63,3 +65,4 @@ jobs:
           name: shikigotchi v${{ env.VERSION }}
           files: shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img.xz
           generate_release_notes: true
+          token: ${{ secrets.GH_TOKEN }}

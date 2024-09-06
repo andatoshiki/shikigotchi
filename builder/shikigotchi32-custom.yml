@@ -486,10 +486,44 @@
     - name: update system-wide native localization configuration
       shell: "echo 'LC_ALL=en_US.UTF-8' >> /etc/environment && echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && echo 'LANG=en_US.UTF-8' > /etc/locale.conf && locale-gen en_US.UTF-8"
     
-    - name: Delete motd
-      file:
-        state: absent
-        path: /etc/motd
+    # - name: Delete motd
+    #   file:
+    #     state: absent
+    #     path: /etc/motd
+
+    - name: Configure motd
+      copy:
+        dest: /etc/motd
+        content: |
+          (◕‿‿◕) {{shikigotchi.hostname}}
+
+          Hi! I'm a shikigotchi $_version, please take good care of me!
+          Here are some basic things you need to know to raise me properly!
+
+          If you want to change my configuration, use /etc/shikigotchi/config.toml
+          All plugin config files are located in /etc/shikigotchi/conf.d/
+          Read the readme if you want to use gdrivesync plugin!!
+
+          All the configuration options can be found on /etc/shikigotchi/default.toml,
+          but don't change this file because I will recreate it every time I'm restarted!
+
+          I use Shikigrid as my main API, you can check stats at https://grid.toshiki.dev
+
+          I'm managed by systemd. Here are some basic commands.
+
+          If you want to know what I'm doing, you can check my logs with the command
+          - shikilog
+          - sudo shikigotchi --wizard, to help set up a config.toml
+          - sudo shikigotchi --version, to check the current version
+          - sudo shikigotchi --donate, to see how you can donate to this project
+          - sudo shikigotchi --check-update, to see if there is a new version available
+
+          If you want to know if I'm running, you can use
+          sudo systemctl status shikigotchi
+
+          You can restart me using
+          shikikill
+        when: hostname.changed
 
     - name: Delete motd 10-uname
       file:

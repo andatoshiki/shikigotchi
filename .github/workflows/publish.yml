@@ -23,8 +23,8 @@ jobs:
           id: "32bit"  
         - name: "Shikigotchi 64-bit"
           id: "64bit"
-        # - name: "Shikigotchi Custom 32-bit"
-        #   id: "custom"
+        - name: "Shikigotchi Custom 32-bit"
+          id: "custom"
 
     steps:
       - uses: actions/checkout@v4

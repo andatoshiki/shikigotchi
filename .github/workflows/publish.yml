@@ -41,7 +41,7 @@ jobs:
         run: sudo apt update && sudo apt install qemu-user-static qemu-utils xz-utils -y
 
       - name: Build ${{ matrix.name }} img file
-        run: cd publish/build; ls -la .; pwd; make packer; make ${{ matrix.id }}
+        run: ls -la .; pwd; make ${{ matrix.id }}
       
       - name: Change name of .img.xz to add version
         run: |

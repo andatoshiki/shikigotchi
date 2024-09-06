@@ -28,8 +28,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          path: publish/build
 
       - name: Extract version from file
         id: get_version

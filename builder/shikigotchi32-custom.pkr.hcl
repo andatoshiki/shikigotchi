@@ -49,7 +49,7 @@ source "arm" "rpi32-shikigotchi" {
   }
 }
 build {
-  name = "Shikigotchi 32 Bit"
+  name = "Shikigotchi Custom 32 Bit"
   sources = ["source.arm.rpi32-shikigotchi"]
   provisioner "file" {
     destination = "/usr/bin/"

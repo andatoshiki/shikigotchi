@@ -3,7 +3,7 @@ name: Build or Publish Shikigotchi
 on:
   push:
     tags:        
-      - 'v*.*.*'  
+      - '*.*.*'  
     branches:
       - master
   workflow_dispatch:

@@ -16,8 +16,8 @@ main.custom_plugin_repos = [
 
 main.custom_plugins = "/usr/local/share/shikigotchi/custom-plugins/"
 
-main.plugins.auto-update.enabled = true
-main.plugins.auto-update.install = true
+main.plugins.auto-update.enabled = false
+main.plugins.auto-update.install = false
 main.plugins.auto-update.interval = 1
 
 main.plugins.bt-tether.enabled = false

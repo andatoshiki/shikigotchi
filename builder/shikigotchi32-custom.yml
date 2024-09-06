@@ -485,6 +485,11 @@
 
     - name: update system-wide native localization configuration
       shell: "echo 'LC_ALL=en_US.UTF-8' >> /etc/environment && echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && echo 'LANG=en_US.UTF-8' > /etc/locale.conf && locale-gen en_US.UTF-8"
+    
+    - name: Delete motd
+      file:
+        state: absent
+        path: /etc/motd
 
     - name: Delete motd 10-uname
       file:
@@ -568,10 +573,10 @@
         path: /root/go_pkgs.tgz
         state: absent
 
-    - name: remove golang
-      file:
-        state: absent
-        path: /usr/local/go
+    # - name: remove golang
+    #   file:
+    #     state: absent
+    #     path: /usr/local/go
 
     - name: remove /root/.cache (pip cache)
       file:

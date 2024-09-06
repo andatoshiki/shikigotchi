@@ -2,8 +2,8 @@ name: Build or Publish Shikigotchi
 
 on:
   push:
-    tags:        
-      - '*.*.*'  
+    # tags:        
+    #   - '*.*.*'  
     branches:
       - master
   workflow_dispatch:
@@ -49,11 +49,11 @@ jobs:
           sudo mv pishrink.sh /usr/local/bin
           sudo pishrink.sh -aZ "shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img"
       
-      - name: Upload built artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: shikigotchi-${{ env.VERSION }}-${{ matrix.id }}
-          path: shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img.xz
+      # - name: Upload built artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: shikigotchi-${{ env.VERSION }}-${{ matrix.id }}
+      #     path: shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img.xz
 
       - name: Release
         if: startsWith(github.ref, 'refs/tags/')
@@ -61,8 +61,8 @@ jobs:
         with:
           prerelease: false
           make_latest: true
-          tag_name: v${{ env.VERSION }}
-          name: shikigotchi v${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
+          name: Shikigotchi v${{ env.VERSION }}
           files: shikigotchi-${{ env.VERSION }}-${{ matrix.id }}.img.xz
           generate_release_notes: true
           token: ${{ secrets.GH_TOKEN }}
